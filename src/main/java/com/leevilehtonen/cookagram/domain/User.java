@@ -5,11 +5,12 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Account extends AbstractPersistable<Long> {
+@Table(name = "user_account")
+public class User extends AbstractPersistable<Long> {
 
     @Column(unique = true)
     @NotBlank
@@ -31,6 +32,15 @@ public class Account extends AbstractPersistable<Long> {
     @NotBlank
     @Email
     private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
 
     public String getUsername() {
@@ -71,5 +81,13 @@ public class Account extends AbstractPersistable<Long> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
