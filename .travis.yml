@@ -4,3 +4,8 @@ jdk:
 services:
   - postgresql
 sudo: required
+cache:
+  directories:
+    - $HOME/.m2
+notifications:
+  email: false
