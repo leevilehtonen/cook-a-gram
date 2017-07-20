@@ -7,7 +7,7 @@ import com.leevilehtonen.cookagram.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -26,7 +26,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     private RoleRepository roleRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
@@ -46,7 +46,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         if (password == null) {
             password = "123456";
         }
-        account.setPassword(passwordEncoder.encode(password));
+        account.setPassword(bCryptPasswordEncoder.encode(password));
         List<Role> roles = new ArrayList<>();
         roles.add(roleRepository.findByName("ADMIN"));
         roles.add(roleRepository.findByName("USER"));

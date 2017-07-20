@@ -17,5 +17,16 @@ public class DefaultController {
         return "Hello world";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLogin() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String getSignup() {
+        return "signup";
+    }
+
+
 
 }

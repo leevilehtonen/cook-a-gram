@@ -18,17 +18,16 @@ public class Account extends AbstractPersistable<Long> {
     private String username;
 
     @NotBlank
-    @Length(min = 4, max = 64)
+    @Length(min = 5, max = 64)
     private String password;
 
     @NotBlank
-    @Length(min = 2, max = 32)
     private String firstname;
 
     @NotBlank
-    @Length(min = 2, max = 32)
     private String lastname;
 
+    @Column(unique = true)
     @NotBlank
     @Email
     private String email;
