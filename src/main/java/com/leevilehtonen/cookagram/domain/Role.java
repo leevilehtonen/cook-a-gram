@@ -4,9 +4,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
+@Table(name = "role")
 public class Role extends AbstractPersistable<Long> {
 
     private String name;
