@@ -1,8 +1,8 @@
 package com.leevilehtonen.cookagram.service;
 
+import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.domain.Role;
-import com.leevilehtonen.cookagram.domain.User;
-import com.leevilehtonen.cookagram.repository.UserRepository;
+import com.leevilehtonen.cookagram.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,16 +18,16 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        Account account = accountRepository.findByUsername(username);
 
-        if (user == null) {
+        if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(account.getUsername(), account.getPassword(), getGrantedAuthorities(account.getRoles()));
 
     }
 

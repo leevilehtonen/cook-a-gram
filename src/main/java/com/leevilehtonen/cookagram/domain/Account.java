@@ -5,12 +5,14 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
-@Table(name = "user_account")
-public class User extends AbstractPersistable<Long> {
+public class Account extends AbstractPersistable<Long> {
 
     @Column(unique = true)
     @NotBlank

@@ -12,7 +12,7 @@ public class Role extends AbstractPersistable<Long> {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private List<Account> accounts;
 
 
     public String getName() {
@@ -23,12 +23,11 @@ public class Role extends AbstractPersistable<Long> {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
-
 }
