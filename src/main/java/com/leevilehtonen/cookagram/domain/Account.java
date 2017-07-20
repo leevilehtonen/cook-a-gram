@@ -34,6 +34,12 @@ public class Account extends AbstractPersistable<Long> {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "accounts_roles",
+            joinColumns = @JoinColumn(
+                    name = "account_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 
 
