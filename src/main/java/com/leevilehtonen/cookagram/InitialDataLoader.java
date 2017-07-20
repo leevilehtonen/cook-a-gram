@@ -36,6 +36,11 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         createRole("ADMIN");
         createRole("USER");
 
+        if (accountRepository.findByUsername("root") != null) {
+            setup = true;
+            return;
+        }
+
         Account account = new Account();
         account.setUsername("root");
         account.setEmail("root@root.com");
