@@ -19,6 +19,17 @@
 
 <div class="container">
 
+    <div th:if="${param.error}" class="alert-dialog alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p class="alert-dialog-text">Invalid username or password</p>
+    </div>
+
+    <div th:if="${message}" class="alert-dialog alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p th:text="${message}" class="alert-dialog-text"></p>
+    </div>
+
+
     <form class="form-login" method="POST" th:action="@{/authenticate}">
         <h1 class="display-4 form-login-heading">Log in</h1>
 

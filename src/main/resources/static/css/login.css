@@ -8,6 +8,16 @@ body {
     color: red;
 }
 
+.alert-dialog {
+    max-width: 300px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.alert-dialog-text {
+    margin: 0;
+}
+
 .form-login {
     max-width: 330px;
     padding: 15px;

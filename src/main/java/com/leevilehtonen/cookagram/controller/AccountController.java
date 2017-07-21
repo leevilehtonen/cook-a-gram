@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -24,7 +25,7 @@ public class AccountController {
     private AccountUniqueValidator accountUniqueValidator;
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postAccounts(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult) {
+    public String postAccounts(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         accountUniqueValidator.validate(account, bindingResult);
         if (bindingResult.hasErrors()) {
             return "signup";
@@ -32,7 +33,8 @@ public class AccountController {
 
         accountService.save(account);
 
-        return "redirect:/index";
+        redirectAttributes.addFlashAttribute("message", "You have successfully created an account.");
+        return "redirect:/login";
     }
 
 
