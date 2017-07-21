@@ -3,6 +3,7 @@ package com.leevilehtonen.cookagram.controller;
 
 import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.service.AccountService;
+import com.leevilehtonen.cookagram.validator.AccountUniqueValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,11 +20,14 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String postAccounts(@Valid @ModelAttribute Account account, BindingResult bindingResult) {
+    @Autowired
+    private AccountUniqueValidator accountUniqueValidator;
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String postAccounts(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult) {
+        accountUniqueValidator.validate(account, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "signup";
         }
 
         accountService.save(account);

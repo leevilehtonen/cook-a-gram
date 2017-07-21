@@ -34,7 +34,7 @@ public class Account extends AbstractPersistable<Long> {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "accounts_roles",
+            name = "account_role",
             joinColumns = @JoinColumn(
                     name = "account_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(

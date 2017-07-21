@@ -18,23 +18,37 @@
 
 <div class="container">
 
-    <form class="form-signup" method="POST" th:action="@{/accounts}">
+    <form class="form-signup" method="POST" th:action="@{/accounts}" th:object="${account}">
         <h1 class="display-4 form-signup-heading">Sign up</h1>
 
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required"
                autofocus="autofocus"/>
 
+        <label class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</label>
+
+
         <input type="text" name="firstname" id="inputFirstname" class="form-control" placeholder="First Name"
                required="required"/>
+
+        <label class="error" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname Error</label>
+
 
         <input type="text" name="lastname" id="inputLastname" class="form-control" placeholder="Last Name"
                required="required"/>
 
+        <label class="error" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</label>
+
+
         <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username"
                required="required"/>
 
+        <label class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</label>
+
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
                required="required"/>
+
+        <label class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</label>
+
 
         <p class="form-text text-muted">Have an account? <a th:href="@{/login}">Login</a></p>
         <button class="btn btn-primary btn-block" type="submit">Sign up</button>
@@ -52,7 +66,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
         integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="../../js/signup.js" th:src="@{/js/signup.js}" type="application/javascript"></script>
 </body>
 

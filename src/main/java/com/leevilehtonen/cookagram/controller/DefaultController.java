@@ -1,5 +1,6 @@
 package com.leevilehtonen.cookagram.controller;
 
+import com.leevilehtonen.cookagram.domain.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class DefaultController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String getSignup() {
+    public String getSignup(Account account) {
         return "signup";
     }
 
