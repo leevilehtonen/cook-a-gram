@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -39,8 +39,10 @@ public class Account extends AbstractPersistable<Long> {
                     name = "account_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
+    private Set<Role> roles;
 
+    @OneToMany(mappedBy = "poster")
+    private Set<Post> posts;
 
     public String getUsername() {
         return username;
@@ -82,11 +84,19 @@ public class Account extends AbstractPersistable<Long> {
         this.email = email;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

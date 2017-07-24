@@ -24,24 +24,29 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.csrf().disable();
+
+        http.headers().frameOptions().sameOrigin();
+
         http.authorizeRequests()
-                .antMatchers("/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/", "/explore", "/login", "/signup", "/h2-console/**", "/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/accounts").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
-                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/feed", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/explore")
                 .permitAll()
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true)
+                .clearAuthentication(true);
     }
 
     @Override

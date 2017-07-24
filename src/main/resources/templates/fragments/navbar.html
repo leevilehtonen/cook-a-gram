@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<div th:fragment="navbar-auth" class="fixed-bottom row justify-content-center bg-primary">
+    <ul class="nav nav-pills nav-justified col-6">
+        <li class="nav-item">
+            <a class="nav-link" href="/feed">Feed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/post">Post</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+            <form id="logout-form" method="POST" th:action="@{/logout}"></form>
+            <a class="nav-link text-danger" href="#" onclick="$('#logout-form').submit(); return false;">Logout</a>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="navbar" class="fixed-bottom row justify-content-center bg-primary">
+    <ul class="nav nav-pills nav-justified col-6">
+        <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-success" href="/login">Log in</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-info" href="/signup">Sign up</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

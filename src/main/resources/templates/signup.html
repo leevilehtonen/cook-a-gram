@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
+<html
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -12,11 +14,20 @@
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
     <link href="../../css/signup.css" rel="stylesheet" th:href="@{/css/signup.css}" type="text/css"/>
+    <link href="../../css/navbar.css" rel="stylesheet" th:href="@{/css/navbar.css}" type="text/css"/>
+
 </head>
 
 <body>
 
 <div class="container">
+
+    <div sec:authorize="isAuthenticated()">
+        <div th:replace="fragments/navbar :: navbar-auth"></div>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <div th:replace="fragments/navbar :: navbar"></div>
+    </div>
 
     <form class="form-signup" method="POST" th:action="@{/accounts}" th:object="${account}">
         <h1 class="display-4 form-signup-heading">Sign up</h1>
@@ -57,8 +68,8 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"

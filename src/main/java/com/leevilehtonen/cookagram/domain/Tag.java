@@ -2,20 +2,19 @@ package com.leevilehtonen.cookagram.domain;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
-public class Role extends AbstractPersistable<Long> {
+public class Tag extends AbstractPersistable<Long> {
 
+    @Column(unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Account> accounts;
-
+    @ManyToMany(mappedBy = "tags")
+    private Set<Post> posts;
 
     public String getName() {
         return name;
@@ -25,11 +24,11 @@ public class Role extends AbstractPersistable<Long> {
         this.name = name;
     }
 
-    public Set<Account> getAccounts() {
-        return accounts;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

@@ -10,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class AccountService {
@@ -27,7 +27,7 @@ public class AccountService {
 
     public void save(Account account) {
         account.setPassword(bCryptPasswordEncoder.encode(account.getPassword()));
-        List<Role> roles = new ArrayList<>();
+        Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("USER"));
         account.setRoles(roles);
         accountRepository.save(account);

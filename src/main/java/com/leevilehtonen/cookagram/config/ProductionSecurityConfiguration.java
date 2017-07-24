@@ -23,21 +23,21 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/explore", "/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/accounts").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
-                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/feed", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/explore")
                 .permitAll()
                 .invalidateHttpSession(true);
     }

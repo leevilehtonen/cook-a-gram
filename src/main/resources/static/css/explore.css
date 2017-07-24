@@ -1,0 +1,28 @@
+.card-date {
+    float: right;
+}
+
+.post-item {
+    margin-top: 20px;
+}
+
+.container {
+    margin-bottom: 100px;
+}
+
+.badge {
+    font-size: unset;
+}
+
+.like-btn {
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    margin-right: 1.5rem;
+    font-size: 2rem;
+    padding: 0.1rem 0.5rem;
+}
+
+.card-footer {
+    padding: 0;
+}

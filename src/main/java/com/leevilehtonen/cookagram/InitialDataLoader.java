@@ -11,8 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -52,7 +52,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             password = "123456";
         }
         account.setPassword(bCryptPasswordEncoder.encode(password));
-        List<Role> roles = new ArrayList<>();
+        Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("ADMIN"));
         roles.add(roleRepository.findByName("USER"));
         account.setRoles(roles);
