@@ -1,0 +1,41 @@
+.container {
+    margin-bottom: 100px;
+}
+
+.addfriend-btn {
+    box-shadow: unset;
+    margin: -1px;
+    width: unset;
+    text-transform: unset;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.addfriend-btn:active, .addfriend-btn:hover, .addfriend-btn:focus {
+    color: #187aa3;
+    box-shadow: unset;
+    background-color: #1F9BCF;
+}
+
+.card-title, .card-subtitle {
+    text-transform: unset;
+}
+
+.image-block {
+    padding: 0;
+    margin-left: -1px;
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+.table {
+    margin: 0;
+}
+
+.table td {
+    border-top: 0;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
