@@ -57,6 +57,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         roles.add(roleRepository.findByName("USER"));
         account.setRoles(roles);
         accountRepository.save(account);
+
+
         setup = true;
     }
 

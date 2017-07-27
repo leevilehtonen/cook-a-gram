@@ -4,6 +4,7 @@ import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.repository.AccountRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
 import com.leevilehtonen.cookagram.service.AccountService;
+import com.leevilehtonen.cookagram.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ public class DefaultController {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private PostService postService;
 
     @Autowired
     private AccountService accountService;
@@ -57,7 +61,11 @@ public class DefaultController {
         } else {
             account = accountRepository.findByUsername(name);
         }
+
         model.addAttribute("account", account);
+        model.addAttribute("profileimageurl", accountService.getProfilePictureUrl(account));
+        model.addAttribute("posts", postService.getPostsByAccount(account));
+
 
         return "profile";
     }

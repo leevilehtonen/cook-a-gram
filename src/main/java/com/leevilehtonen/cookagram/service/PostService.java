@@ -1,5 +1,6 @@
 package com.leevilehtonen.cookagram.service;
 
+import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.domain.ImageEntity;
 import com.leevilehtonen.cookagram.domain.Post;
 import com.leevilehtonen.cookagram.domain.Tag;
@@ -12,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -66,4 +69,21 @@ public class PostService {
         return tagSet;
     }
 
+    public List<Post[]> getPostsByAccount(Account account) {
+        List<Post> posts = postRepository.findByPosterOrderByDateAsc(account);
+        List<Post[]> postgrid = new ArrayList<>();
+
+        int c = 0;
+        while (c < posts.size()) {
+            Post[] postRow = new Post[3];
+            for (int j = 0; j < 3 && c < posts.size(); j++) {
+                postRow[j] = posts.get(c);
+                c++;
+            }
+            postgrid.add(postRow);
+            postRow = new Post[3];
+        }
+        return postgrid;
+
+    }
 }

@@ -2,8 +2,10 @@ package com.leevilehtonen.cookagram.service;
 
 
 import com.leevilehtonen.cookagram.domain.Account;
+import com.leevilehtonen.cookagram.domain.Post;
 import com.leevilehtonen.cookagram.domain.Role;
 import com.leevilehtonen.cookagram.repository.AccountRepository;
+import com.leevilehtonen.cookagram.repository.PostRepository;
 import com.leevilehtonen.cookagram.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,9 @@ public class AccountService {
     private RoleRepository roleRepository;
 
     @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(Account account) {
@@ -35,5 +40,15 @@ public class AccountService {
 
     public Account getAuthenticatedAccount() {
         return accountRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    public String getProfilePictureUrl(Account account) {
+        if (account.getPosts().size() > 0) {
+            Post p = postRepository.findTopByPosterOrderByDateDesc(account);
+
+            return "/images/" + p.getImage().getId();
+        } else {
+            return "img/profile.jpg";
+        }
     }
 }

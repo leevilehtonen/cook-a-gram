@@ -14,7 +14,7 @@
                 <span th:text="${#calendars.format(post.date, 'HH:mm dd.MM.yyyy')}" class="card-date text-muted">12:00 10.6.2017</span>
             </h6>
 
-            <img style="height: 100%; width:100%; display: block; padding: 0.5rem;"
+            <img style="height: 100%; width:100%; display: block;"
                  th:src="@{/images/{imageId}(imageId=${post.image.id})}"/>
 
 

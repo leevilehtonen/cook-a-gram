@@ -29,11 +29,12 @@
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
 
-    <div class="post-item row justify-content-center">
+    <div class="row justify-content-center profile-item">
         <div class="col-6">
             <div class="card">
 
-                <img style="height: 100%; width:100%; display: block; margin-bottom: -1px;" src="./Profile-102720.jpg"/>
+                <img style="height: 100%; width:100%; display: block; margin-bottom: -1px;"
+                     th:src="@{${profileimageurl}}"/>
                 <div class="card-block">
                     <h5 class="card-title" th:text="${account.firstname +' '+ account.lastname}">First Lastname</h5>
                     <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
@@ -42,25 +43,26 @@
                 <button type="button" class="addfriend-btn btn btn-info btn-block">Add friend</button>
 
                 <div class="image-block card-block">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                        </tr>
-                        <tr>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                        </tr>
-                        <tr>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                            <td><img style="width:100%; display: block;" src="./Profile-102720.jpg"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div th:each="postrow : ${posts}" class="row">
+                        <div class="col">
+                            <a th:href="@{/explore(post=${postrow[0].id})}">
+                                <img style="width:100%; display: block;" th:if="${postrow[0] != null}"
+                                     th:src="@{/images/{imageId}(imageId=${postrow[0].image.id})}"/>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="https://www.w3schools.com">
+                                <img style="width:100%; display: block;" th:if="${postrow[1] != null}"
+                                     th:src="@{/images/{imageId}(imageId=${postrow[1].image.id})}"/>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="https://www.w3schools.com">
+                                <img style="width:100%; display: block;" th:if="${postrow[2] != null}"
+                                     th:src="@{/images/{imageId}(imageId=${postrow[2].image.id})}"/>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

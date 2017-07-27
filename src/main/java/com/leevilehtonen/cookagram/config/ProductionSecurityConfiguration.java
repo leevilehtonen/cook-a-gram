@@ -23,7 +23,7 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/", "/explore", "/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/", "/explore", "/login", "/signup", "/css/**", "/img/**", "/js/**", "/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/accounts").permitAll()
                 .anyRequest().authenticated();
 

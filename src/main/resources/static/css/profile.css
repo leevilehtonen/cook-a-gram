@@ -1,4 +1,9 @@
+body {
+    background-color: #eee;
+}
+
 .container {
+
     margin-bottom: 100px;
 }
 
@@ -28,14 +33,18 @@
     margin-bottom: -1px;
 }
 
-.table {
+.row {
     margin: 0;
 }
 
-.table td {
+.col {
     border-top: 0;
     padding: 0;
     border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.profile-item {
+    margin-top: 20px;
 }
 
 

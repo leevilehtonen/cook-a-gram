@@ -19,6 +19,7 @@ body {
 }
 
 .like-btn {
+    box-shadow: unset;
     margin-left: -1px;
     margin-top: -1px;
     margin-bottom: -1px;
@@ -27,7 +28,7 @@ body {
     padding: 0.1rem 0.5rem;
 }
 
-.like-btn:active, .like-btn:hover {
+.like-btn:active, .like-btn:hover, .like-btn:focus {
     color: #a70500;
     box-shadow: unset;
 }
