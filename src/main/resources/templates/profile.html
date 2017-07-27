@@ -35,8 +35,8 @@
 
                 <img style="height: 100%; width:100%; display: block; margin-bottom: -1px;" src="./Profile-102720.jpg"/>
                 <div class="card-block">
-                    <h5 class="card-title">Leevi Lehtonen</h5>
-                    <h6 class="card-subtitle text-muted">lleevi</h6>
+                    <h5 class="card-title" th:text="${account.firstname +' '+ account.lastname}">First Lastname</h5>
+                    <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
 
                 </div>
                 <button type="button" class="addfriend-btn btn btn-info btn-block">Add friend</button>

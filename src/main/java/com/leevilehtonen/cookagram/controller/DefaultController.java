@@ -1,6 +1,7 @@
 package com.leevilehtonen.cookagram.controller;
 
 import com.leevilehtonen.cookagram.domain.Account;
+import com.leevilehtonen.cookagram.repository.AccountRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
 import com.leevilehtonen.cookagram.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class DefaultController {
@@ -17,6 +19,9 @@ public class DefaultController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLogin() {
@@ -45,7 +50,15 @@ public class DefaultController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String getProfile() {
+    public String getProfile(@RequestParam(value = "name", required = false) String name, Model model) {
+        Account account = null;
+        if (name == null) {
+            account = accountService.getAuthenticatedAccount();
+        } else {
+            account = accountRepository.findByUsername(name);
+        }
+        model.addAttribute("account", account);
+
         return "profile";
     }
 
