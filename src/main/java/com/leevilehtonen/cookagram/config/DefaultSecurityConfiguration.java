@@ -52,7 +52,6 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-        auth.inMemoryAuthentication().withUser("tester").password("123456").roles("USER");
     }
 
     @Bean

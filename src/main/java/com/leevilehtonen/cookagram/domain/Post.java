@@ -27,6 +27,17 @@ public class Post extends AbstractPersistable<Long> {
     @OneToOne
     private ImageEntity image;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
+    private Set<Like> likes;
+
+    public Set<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<Like> likes) {
+        this.likes = likes;
+    }
+
     public Post() {
         this.date = new Date();
     }

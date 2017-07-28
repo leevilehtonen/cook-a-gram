@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,7 +13,7 @@
     <div class="col-6">
         <div class="card">
             <h6 class="card-header">
-                <span th:text="${post.poster.username}">Header</span>
+                <a th:href="@{/profile(id=${post.poster.id})}" th:text="${post.poster.username}">Header</a>
                 <span th:text="${#calendars.format(post.date, 'HH:mm dd.MM.yyyy')}" class="card-date text-muted">12:00 10.6.2017</span>
             </h6>
 
@@ -19,10 +22,17 @@
 
 
             <div class="card-footer">
-                <button type="button" class="like-btn btn btn-danger">❤</button>
+                <button sec:authorize="isAuthenticated()" th:onclick="|likePost(${post.id})|"
+                        th:id="|like_btn_${post.id}|" type="button"
+                        th:classappend="${#sets.contains(likes, post.id)} ? 'active-btn' : ''"
+                        class="like-btn btn btn-danger">❤
+                </button>
+                <a sec:authorize="isAnonymous()" th:href="@{/login}" role="button" class="like-btn btn btn-danger">❤</a>
 
-                <span th:each="tag : ${post.tags}" class="h6 badge badge-pill badge-info"
-                      th:text="${tag.name}">Tag</span>
+                <span th:id="|like_count_${post.id}|" class="like-count"
+                      th:text="${#arrays.length(post.likes)}">123</span>
+                <a th:each="tag : ${post.tags}" class="h6 badge badge-pill badge-info"
+                   th:text="${tag.name}" th:href="@{/explore(tag=${tag.name})}">Tag</a>
             </div>
         </div>
     </div>

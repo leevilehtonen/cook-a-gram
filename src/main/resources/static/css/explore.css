@@ -16,6 +16,7 @@ body {
 
 .badge {
     font-size: unset;
+    margin-top: 5px;
 }
 
 .like-btn {
@@ -23,16 +24,28 @@ body {
     margin-left: -1px;
     margin-top: -1px;
     margin-bottom: -1px;
-    margin-right: 1.5rem;
+    margin-right: 0.5rem;
     font-size: 2rem;
     padding: 0.1rem 0.5rem;
 }
 
-.like-btn:active, .like-btn:hover, .like-btn:focus {
+.like-count {
+    margin-right: 0.5rem;
+}
+
+.like-btn:hover {
     color: #a70500;
+    box-shadow: unset;
+}
+
+.like-btn:active, .like-btn:focus {
     box-shadow: unset;
 }
 
 .card-footer {
     padding: 0;
+}
+
+.active-btn {
+    color: #a70500;
 }

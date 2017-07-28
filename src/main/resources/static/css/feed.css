@@ -1,3 +1,47 @@
 body {
     background-color: #eee;
 }
+
+.info-dialog {
+    margin-top: 20px;
+}
+
+.card-date {
+    float: right;
+}
+
+.post-item {
+    margin-top: 20px;
+}
+
+.container {
+    margin-bottom: 100px;
+}
+
+.badge {
+    font-size: unset;
+    margin-top: 5px;
+}
+
+.like-btn {
+    box-shadow: unset;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    padding: 0.1rem 0.5rem;
+}
+
+.like-count {
+    margin-right: 0.5rem;
+}
+
+.like-btn:active, .like-btn:hover, .like-btn:focus {
+    color: #a70500;
+    box-shadow: unset;
+}
+
+.card-footer {
+    padding: 0;
+}

@@ -36,29 +36,44 @@
                 <img style="height: 100%; width:100%; display: block; margin-bottom: -1px;"
                      th:src="@{${profileimageurl}}"/>
                 <div class="card-block">
-                    <h5 class="card-title" th:text="${account.firstname +' '+ account.lastname}">First Lastname</h5>
-                    <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
 
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-title" th:text="${account.firstname +' '+ account.lastname}">
+                                FirstLastname</h5>
+                            <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
+                        </div>
+                        <div class="count-field col-3">
+                            <h6 class="follower-count card-title text-info">123 followers</h6>
+                        </div>
+                        <div class="count-field col-3">
+                            <h6 class="following-count card-title text-info">123 following</h6></div>
+                    </div>
                 </div>
-                <button type="button" class="addfriend-btn btn btn-info btn-block">Add friend</button>
+
+                <form id="follow-form">
+                    <button id="follow-btn" th:if="${#authentication.name != account.username}" type="submit"
+                            th:classappend="${friend} ? 'active' : ''" class="addfriend-btn btn btn-info btn-block"
+                            th:text="${friend} ? 'Following' : 'Follow'"></button>
+                </form>
 
                 <div class="image-block card-block">
                     <div th:each="postrow : ${posts}" class="row">
                         <div class="col">
-                            <a th:href="@{/explore(post=${postrow[0].id})}">
-                                <img style="width:100%; display: block;" th:if="${postrow[0] != null}"
+                            <a th:if="${postrow[0] != null}" th:href="@{/explore(post=${postrow[0].id})}">
+                                <img style="width:100%; display: block;"
                                      th:src="@{/images/{imageId}(imageId=${postrow[0].image.id})}"/>
                             </a>
                         </div>
                         <div class="col">
-                            <a href="https://www.w3schools.com">
-                                <img style="width:100%; display: block;" th:if="${postrow[1] != null}"
+                            <a th:if="${postrow[1] != null}" th:href="@{/explore(post=${postrow[1].id})}">
+                                <img style="width:100%; display: block;"
                                      th:src="@{/images/{imageId}(imageId=${postrow[1].image.id})}"/>
                             </a>
                         </div>
                         <div class="col">
-                            <a href="https://www.w3schools.com">
-                                <img style="width:100%; display: block;" th:if="${postrow[2] != null}"
+                            <a th:if="${postrow[2] != null}" th:href="@{/explore(post=${postrow[2].id})}">
+                                <img style="width:100%; display: block;"
                                      th:src="@{/images/{imageId}(imageId=${postrow[2].image.id})}"/>
                             </a>
                         </div>
@@ -70,8 +85,9 @@
 
 
 </div>
-
-
+<script type="text/javascript" th:inline="javascript">
+    var targetId = /*[[${account.id}]]*/ null;
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>

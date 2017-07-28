@@ -41,8 +41,29 @@ public class Account extends AbstractPersistable<Long> {
                     name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "poster")
+    @OneToMany(mappedBy = "poster", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Post> posts;
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Relationship> followings;
+    @OneToMany(mappedBy = "liker")
+    private Set<Like> likes;
+
+    public Set<Relationship> getFollowings() {
+        return followings;
+    }
+
+    public void setFollowings(Set<Relationship> followings) {
+        this.followings = followings;
+    }
+
+    public Set<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<Like> likes) {
+        this.likes = likes;
+    }
 
     public String getUsername() {
         return username;

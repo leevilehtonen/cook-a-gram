@@ -41,22 +41,37 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             return;
         }
 
-        Account account = new Account();
-        account.setUsername("root");
-        account.setEmail("root@root.com");
-        account.setFirstname("Root");
-        account.setLastname("Root");
+        Account admin = new Account();
+        admin.setUsername("root");
+        admin.setEmail("root@root.com");
+        admin.setFirstname("Root");
+        admin.setLastname("Root");
 
         String password = System.getenv("ADMIN_PASSWORD");
         if (password == null) {
             password = "123456";
         }
-        account.setPassword(bCryptPasswordEncoder.encode(password));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByName("ADMIN"));
-        roles.add(roleRepository.findByName("USER"));
-        account.setRoles(roles);
-        accountRepository.save(account);
+        admin.setPassword(bCryptPasswordEncoder.encode(password));
+        Set<Role> rolesAdmin = new HashSet<>();
+        rolesAdmin.add(roleRepository.findByName("ADMIN"));
+        rolesAdmin.add(roleRepository.findByName("USER"));
+        admin.setRoles(rolesAdmin);
+        accountRepository.save(admin);
+
+
+        Account user = new Account();
+        user.setUsername("tester");
+        user.setEmail("test@test.com");
+        user.setFirstname("Test");
+        user.setLastname("Test");
+
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        Set<Role> rolesUser = new HashSet<>();
+        rolesUser.add(roleRepository.findByName("USER"));
+        user.setRoles(rolesUser);
+        accountRepository.save(user);
+
+
 
 
         setup = true;

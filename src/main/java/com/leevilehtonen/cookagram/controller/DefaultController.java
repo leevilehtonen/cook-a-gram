@@ -3,7 +3,10 @@ package com.leevilehtonen.cookagram.controller;
 import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.repository.AccountRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
+import com.leevilehtonen.cookagram.repository.RelationshipRepository;
+import com.leevilehtonen.cookagram.repository.TagRepository;
 import com.leevilehtonen.cookagram.service.AccountService;
+import com.leevilehtonen.cookagram.service.LikeService;
 import com.leevilehtonen.cookagram.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,15 @@ public class DefaultController {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private RelationshipRepository relationshipRepository;
+
+    @Autowired
+    private LikeService likeService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLogin() {
         return "login";
@@ -38,13 +50,24 @@ public class DefaultController {
     }
 
     @RequestMapping(value = "/feed", method = RequestMethod.GET)
-    public String getFeed() {
+    public String getFeed(Model model) {
+        model.addAttribute("posts", postService.getPostsFromFollowedAccounts());
         return "feed";
     }
 
     @RequestMapping(value = "/explore", method = RequestMethod.GET)
-    public String getExplore(Model model) {
-        model.addAttribute("posts", postRepository.findAll());
+    public String getExplore(
+            @RequestParam(value = "post", required = false) Long postId,
+            @RequestParam(value = "tag", required = false) String tagName,
+            Model model) {
+        if (postId != null) {
+            model.addAttribute("posts", postRepository.findOne(postId));
+        } else if (tagName != null && tagRepository.findByName(tagName) != null) {
+            model.addAttribute("posts", tagRepository.findByName(tagName).getPosts());
+        } else {
+            model.addAttribute("posts", postRepository.findAll());
+        }
+        model.addAttribute("likes", likeService.getAccountLikedPostIds(accountService.getAuthenticatedAccount()));
         return "explore";
     }
 
@@ -54,12 +77,20 @@ public class DefaultController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String getProfile(@RequestParam(value = "name", required = false) String name, Model model) {
+    public String getProfile(@RequestParam(value = "id", required = false) Long id, Model model) {
+        if (id == accountService.getAuthenticatedAccount().getId()) {
+            return "redirect:/profile";
+        }
         Account account = null;
-        if (name == null) {
+        if (id == null) {
             account = accountService.getAuthenticatedAccount();
         } else {
-            account = accountRepository.findByUsername(name);
+            account = accountRepository.findOne(id);
+            if (relationshipRepository.findTopByFollowerAndFollowed(accountService.getAuthenticatedAccount(), account) != null) {
+                model.addAttribute("friend", true);
+            } else {
+                model.addAttribute("friend", false);
+            }
         }
 
         model.addAttribute("account", account);
@@ -79,7 +110,6 @@ public class DefaultController {
         }
 
     }
-
 
 
 }

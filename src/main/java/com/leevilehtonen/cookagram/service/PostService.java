@@ -1,11 +1,9 @@
 package com.leevilehtonen.cookagram.service;
 
-import com.leevilehtonen.cookagram.domain.Account;
-import com.leevilehtonen.cookagram.domain.ImageEntity;
-import com.leevilehtonen.cookagram.domain.Post;
-import com.leevilehtonen.cookagram.domain.Tag;
+import com.leevilehtonen.cookagram.domain.*;
 import com.leevilehtonen.cookagram.repository.ImageRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
+import com.leevilehtonen.cookagram.repository.RelationshipRepository;
 import com.leevilehtonen.cookagram.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +30,9 @@ public class PostService {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private RelationshipRepository relationshipRepository;
 
     @Transactional
     public void createPost(MultipartFile file, String tags) throws IOException {
@@ -69,8 +70,9 @@ public class PostService {
         return tagSet;
     }
 
+    @Transactional
     public List<Post[]> getPostsByAccount(Account account) {
-        List<Post> posts = postRepository.findByPosterOrderByDateAsc(account);
+        List<Post> posts = postRepository.findByPosterOrderByDateDesc(account);
         List<Post[]> postgrid = new ArrayList<>();
 
         int c = 0;
@@ -85,5 +87,15 @@ public class PostService {
         }
         return postgrid;
 
+    }
+
+    public List<Post> getPostsFromFollowedAccounts() {
+        List<Account> followedAccounts = new ArrayList<>();
+        List<Relationship> relationships = relationshipRepository.findByFollower(accountService.getAuthenticatedAccount());
+        if (relationships == null) {
+            return new ArrayList<>();
+        }
+        relationships.forEach(relationship -> followedAccounts.add(relationship.getFollowed()));
+        return postRepository.findByPosterInOrderByDateDesc(followedAccounts);
     }
 }

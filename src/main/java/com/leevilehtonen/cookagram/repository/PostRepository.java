@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
 
-    List<Post> findByPosterOrderByDateAsc(Account poster);
+    List<Post> findByPosterInOrderByDateDesc(List<Account> posters);
+
+    List<Post> findByPosterOrderByDateDesc(Account poster);
 
     Post findTopByPosterOrderByDateDesc(Account poster);
 
