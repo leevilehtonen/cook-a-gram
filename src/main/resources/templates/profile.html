@@ -38,18 +38,18 @@
                 <div class="card-block">
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 col-lg-8">
                             <h5 class="card-title" th:text="${account.firstname +' '+ account.lastname}">
                                 FirstLastname</h5>
                             <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
                         </div>
-                        <div class="count-field col-3">
+                        <div class="count-field col-3 col-lg-2">
                             <h6 class="follower-count card-title text-info"
                                 th:text="${followers!=null} ? (${#sets.size(followers)} +' '+ #{page.profile.followers}) : '0 ' + #{page.profile.followers}">
                                 123
                                 followers</h6>
                         </div>
-                        <div class="count-field col-3">
+                        <div class="count-field col-3 col-lg-2">
                             <h6 class="following-count card-title text-info"
                                 th:text="${followings!=null} ? (${#sets.size(followings)} +' '+ #{page.profile.following}) : '0 ' + #{page.profile.following}">
                                 123 following</h6></div>
