@@ -7,9 +7,9 @@ import com.leevilehtonen.cookagram.repository.RelationshipRepository;
 import com.leevilehtonen.cookagram.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,13 +35,15 @@ public class PostService {
     private RelationshipRepository relationshipRepository;
 
     @Transactional
-    public void createPost(MultipartFile file, String tags) throws IOException {
+    public void createPost(String file, String tags) throws IOException {
 
         ImageEntity imageEntity = new ImageEntity();
-        imageEntity.setName(file.getOriginalFilename());
-        imageEntity.setMediaType(file.getContentType());
-        imageEntity.setSize(file.getSize());
-        imageEntity.setContent(file.getBytes());
+        byte[] imagedata = DatatypeConverter.parseBase64Binary(file.substring(file.indexOf(",") + 1));
+
+        imageEntity.setName("upload.jpeg");
+        imageEntity.setMediaType("image/jpeg");
+        imageEntity.setSize(new Long(imagedata.length));
+        imageEntity.setContent(imagedata);
         imageRepository.save(imageEntity);
 
         Set<Tag> tagsSet = saveAndLoadTags(tags);

@@ -32,21 +32,18 @@
     <div th:replace="fragments/languagemenu :: languagemenu"></div>
 
 
-    <div th:if="${message}" class="alert-dialog alert alert-dismissible alert-danger">
+    <div style="display: none;" id="error-dialog" class="alert-dialog alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <p th:text="#{page.post.message}" class="alert-dialog-text"></p>
     </div>
 
 
     <form class="form-post" method="POST" th:action="@{/posts}" enctype="multipart/form-data">
-
         <h1 class="display-4 form-post-heading" th:text="#{page.post.header}">Post an image</h1>
-        <img class="preview-image" id="preview"/>
+        <canvas class="preview-image" id="preview-canvas" width="0" height="0"></canvas>
         <input type="file" name="file" id="inputFile" class="form-control" accept="image/*" required="required"/>
         <input type="text" data-role="tagsinput" name="tags" id="inputTags" class="form-control"
                th:placeholder="#{page.post.tag}"/>
-
-
         <button class="btn btn-primary btn-block" type="submit" th:text="#{page.post.postbtn}">Post</button>
     </form>
 
