@@ -89,6 +89,7 @@ public class PostService {
 
     }
 
+    @Transactional
     public List<Post> getPostsFromFollowedAccounts() {
         List<Account> followedAccounts = new ArrayList<>();
         List<Relationship> relationships = relationshipRepository.findByFollower(accountService.getAuthenticatedAccount());
