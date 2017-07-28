@@ -63,8 +63,8 @@ public class DefaultController {
             Model model) {
         if (postId != null) {
             model.addAttribute("posts", postRepository.findOne(postId));
-        } else if (tagName != null && tagRepository.findByName(tagName) != null) {
-            model.addAttribute("posts", tagRepository.findByName(tagName).getPosts());
+        } else if (tagName != null) {
+            model.addAttribute("posts", postService.getPostsByTag(tagName));
         } else {
             model.addAttribute("posts", postService.getMostLikedPost());
         }

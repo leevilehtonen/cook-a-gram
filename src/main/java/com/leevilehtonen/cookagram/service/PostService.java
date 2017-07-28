@@ -104,4 +104,13 @@ public class PostService {
     public List<Post> getMostLikedPost() {
         return postRepository.findMostLiked();
     }
+
+    @Transactional
+    public Set<Post> getPostsByTag(String tagName) {
+        Tag tag = tagRepository.findByName(tagName);
+        if (tag == null) {
+            return new HashSet<>();
+        }
+        return tag.getPosts();
+    }
 }

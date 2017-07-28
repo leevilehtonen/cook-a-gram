@@ -5,7 +5,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.transaction.Transactional;
 import java.util.Set;
 
 @Entity
@@ -25,7 +24,6 @@ public class Tag extends AbstractPersistable<Long> {
         this.name = name;
     }
 
-    @Transactional
     public Set<Post> getPosts() {
         return posts;
     }
