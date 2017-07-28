@@ -42,10 +42,15 @@ function sendData(target) {
     var data = {};
     data["target"] = target;
 
+    var headers = {};
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    headers[header] = token;
     $.ajax({
         type: "POST",
         url: "/like",
         data: data,
+        headers: headers,
         success: function (e) {
             $("#like_btn_" + target).removeClass("disabled");
         },
