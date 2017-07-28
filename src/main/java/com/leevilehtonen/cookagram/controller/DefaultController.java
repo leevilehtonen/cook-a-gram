@@ -52,6 +52,7 @@ public class DefaultController {
     @RequestMapping(value = "/feed", method = RequestMethod.GET)
     public String getFeed(Model model) {
         model.addAttribute("posts", postService.getPostsFromFollowedAccounts());
+        model.addAttribute("likes", likeService.getAccountLikedPostIds(accountService.getAuthenticatedAccount()));
         return "feed";
     }
 
@@ -65,7 +66,7 @@ public class DefaultController {
         } else if (tagName != null && tagRepository.findByName(tagName) != null) {
             model.addAttribute("posts", tagRepository.findByName(tagName).getPosts());
         } else {
-            model.addAttribute("posts", postRepository.findAll());
+            model.addAttribute("posts", postService.getMostLikedPost());
         }
         model.addAttribute("likes", likeService.getAccountLikedPostIds(accountService.getAuthenticatedAccount()));
         return "explore";
@@ -86,6 +87,9 @@ public class DefaultController {
             account = accountService.getAuthenticatedAccount();
         } else {
             account = accountRepository.findOne(id);
+            if (account == null) {
+                return "redirect:/profile";
+            }
             if (relationshipRepository.findTopByFollowerAndFollowed(accountService.getAuthenticatedAccount(), account) != null) {
                 model.addAttribute("friend", true);
             } else {

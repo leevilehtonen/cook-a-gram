@@ -99,4 +99,9 @@ public class PostService {
         relationships.forEach(relationship -> followedAccounts.add(relationship.getFollowed()));
         return postRepository.findByPosterInOrderByDateDesc(followedAccounts);
     }
+
+    @Transactional
+    public List<Post> getMostLikedPost() {
+        return postRepository.findMostLiked();
+    }
 }

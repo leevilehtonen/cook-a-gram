@@ -1,10 +1,27 @@
+var followUpdate = false;
+
 jQuery(document).ready(function ($) {
 
     $("#follow-form").on("submit", function (event) {
         event.preventDefault();
         var data = $(this).serialize();
         followUser(data);
+        followUpdate = true;
     });
+
+    $(".follower-count").on("click", function (event) {
+        if (followUpdate) {
+            location.reload(true);
+        }
+        $('#modal-followers').modal({});
+    });
+
+    $(".following-count").on("click", function (event) {
+        if (followUpdate) {
+            location.reload(true);
+        }
+        $('#modal-followings').modal({});
+    })
 });
 
 function followUser(data) {

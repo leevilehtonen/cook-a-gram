@@ -2,8 +2,8 @@ package com.leevilehtonen.cookagram.service;
 
 
 import com.leevilehtonen.cookagram.domain.Account;
-import com.leevilehtonen.cookagram.domain.Like;
 import com.leevilehtonen.cookagram.domain.Post;
+import com.leevilehtonen.cookagram.domain.ResourceLike;
 import com.leevilehtonen.cookagram.repository.LikeRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,9 @@ public class LikeService {
     public void toggleLike(Long target) {
         Account account = accountService.getAuthenticatedAccount();
         Post post = postRepository.findOne(target);
-        Like like = likeRepository.findTopByLikerAndPost(account, post);
+        ResourceLike like = likeRepository.findTopByLikerAndPost(account, post);
         if (like == null) {
-            like = new Like();
+            like = new ResourceLike();
             like.setLiker(account);
             like.setPost(post);
             likeRepository.save(like);
@@ -45,7 +45,7 @@ public class LikeService {
 
     public Set<Long> getAccountLikedPostIds(Account account) {
         Set<Long> likeIds = new HashSet<>();
-        Set<Like> likes = likeRepository.findByLiker(account);
+        Set<ResourceLike> likes = likeRepository.findByLiker(account);
         if (likes == null) {
             return new HashSet<>();
         }

@@ -58,6 +58,12 @@ body {
 .following-count {
     text-align: center;
     margin: 0;
+
+}
+
+.following-count:hover {
+    cursor: pointer;
+    cursor: hand;
 }
 
 .follower-count {
@@ -65,8 +71,21 @@ body {
     margin: 0;
 }
 
+.follower-count:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+
 .count-field {
     display: flex;
     align-items: center;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-list {
+    margin: -1px 0 -1px 0;
 }
 

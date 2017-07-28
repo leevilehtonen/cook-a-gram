@@ -47,7 +47,7 @@ public class Account extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Relationship> followings;
     @OneToMany(mappedBy = "liker")
-    private Set<Like> likes;
+    private Set<ResourceLike> likes;
 
     public Set<Relationship> getFollowings() {
         return followings;
@@ -57,11 +57,11 @@ public class Account extends AbstractPersistable<Long> {
         this.followings = followings;
     }
 
-    public Set<Like> getLikes() {
+    public Set<ResourceLike> getLikes() {
         return likes;
     }
 
-    public void setLikes(Set<Like> likes) {
+    public void setLikes(Set<ResourceLike> likes) {
         this.likes = likes;
     }
 

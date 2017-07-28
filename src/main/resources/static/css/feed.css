@@ -1,11 +1,9 @@
 body {
     background-color: #eee;
 }
-
 .info-dialog {
     margin-top: 20px;
 }
-
 .card-date {
     float: right;
 }
@@ -25,10 +23,7 @@ body {
 
 .like-btn {
     box-shadow: unset;
-    margin-left: -1px;
-    margin-top: -1px;
-    margin-bottom: -1px;
-    margin-right: 0.5rem;
+    margin: 0 0.5rem 0 0;
     font-size: 2rem;
     padding: 0.1rem 0.5rem;
 }
@@ -37,11 +32,23 @@ body {
     margin-right: 0.5rem;
 }
 
-.like-btn:active, .like-btn:hover, .like-btn:focus {
+.like-btn:hover {
     color: #a70500;
+    box-shadow: unset;
+}
+
+.like-btn:active, .like-btn:focus {
     box-shadow: unset;
 }
 
 .card-footer {
     padding: 0;
+}
+
+.active-btn {
+    color: #a70500;
+}
+
+.like-form {
+    display: inline-block;
 }

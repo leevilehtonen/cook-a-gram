@@ -75,7 +75,7 @@ public class AccountService {
         if (relationships == null) {
             return accounts;
         }
-        relationships.forEach(relationship -> accounts.add(relationship.getFollower()));
+        relationships.forEach(relationship -> accounts.add(relationship.getFollowed()));
         return accounts;
     }
 }
