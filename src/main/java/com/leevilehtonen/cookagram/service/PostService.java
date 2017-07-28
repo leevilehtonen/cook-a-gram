@@ -92,7 +92,7 @@ public class PostService {
     @Transactional
     public List<Post> getPostsFromFollowedAccounts() {
         List<Account> followedAccounts = new ArrayList<>();
-        List<Relationship> relationships = relationshipRepository.findByFollower(accountService.getAuthenticatedAccount());
+        Set<Relationship> relationships = relationshipRepository.findByFollower(accountService.getAuthenticatedAccount());
         if (relationships == null) {
             return new ArrayList<>();
         }

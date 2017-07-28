@@ -94,9 +94,10 @@ public class DefaultController {
         }
 
         model.addAttribute("account", account);
+        model.addAttribute("followers", accountService.getFollowers(account));
+        model.addAttribute("followings", accountService.getFollowings(account));
         model.addAttribute("profileimageurl", accountService.getProfilePictureUrl(account));
         model.addAttribute("posts", postService.getPostsByAccount(account));
-
 
         return "profile";
     }

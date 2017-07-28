@@ -44,14 +44,20 @@
                             <h6 class="card-subtitle text-muted" th:text="${account.username}">username</h6>
                         </div>
                         <div class="count-field col-3">
-                            <h6 class="follower-count card-title text-info">123 followers</h6>
+                            <h6 class="follower-count card-title text-info"
+                                th:text="${followers!=null} ? |${#sets.size(followers)} followers| : '0 followers'">123
+                                followers</h6>
                         </div>
                         <div class="count-field col-3">
-                            <h6 class="following-count card-title text-info">123 following</h6></div>
+                            <h6 class="following-count card-title text-info"
+                                th:text="${followings!=null} ? |${#sets.size(followings)} following| : '0 following'">
+                                123 following</h6></div>
                     </div>
                 </div>
 
                 <form id="follow-form">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <input type="hidden" name="target" th:value="${account.id}"/>
                     <button id="follow-btn" th:if="${#authentication.name != account.username}" type="submit"
                             th:classappend="${friend} ? 'active' : ''" class="addfriend-btn btn btn-info btn-block"
                             th:text="${friend} ? 'Following' : 'Follow'"></button>
@@ -85,9 +91,6 @@
 
 
 </div>
-<script type="text/javascript" th:inline="javascript">
-    var targetId = /*[[${account.id}]]*/ null;
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>

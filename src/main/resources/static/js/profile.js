@@ -2,24 +2,33 @@ jQuery(document).ready(function ($) {
 
     $("#follow-form").on("submit", function (event) {
         event.preventDefault();
-
-
-        if (!$("#follow-btn").hasClass("disabled")) {
-            $("#follow-btn").toggleClass("active");
-            if ($("#follow-btn").hasClass("active")) {
-                $("#follow-btn").text("Following");
-            } else {
-                $("#follow-btn").text("Follow");
-            }
-            followAjax();
-            $("#follow-btn").addClass("disabled");
-        }
+        var data = $(this).serialize();
+        followUser(data);
     });
 });
 
-function followAjax() {
-    var data = {};
-    data["target"] = targetId;
+function followUser(data) {
+    var followBtn = $("#follow-btn");
+    var followerCount = $(".follower-count");
+    if (!followBtn.hasClass("disabled")) {
+        followBtn.toggleClass("active");
+        if (followBtn.hasClass("active")) {
+            followBtn.text("Following");
+            var count = parseInt(followerCount.text().split(' ')[0]);
+            count++;
+            followerCount.text(count + ' followers');
+        } else {
+            followBtn.text("Follow");
+            var count = parseInt(followerCount.text().split(' ')[0]);
+            count--;
+            followerCount.text(count + ' followers');
+        }
+        followBtn.addClass("disabled");
+        sendData(data);
+    }
+}
+
+function sendData(data) {
 
     $.ajax({
         type: "POST",

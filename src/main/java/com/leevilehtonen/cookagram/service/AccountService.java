@@ -3,9 +3,11 @@ package com.leevilehtonen.cookagram.service;
 
 import com.leevilehtonen.cookagram.domain.Account;
 import com.leevilehtonen.cookagram.domain.Post;
+import com.leevilehtonen.cookagram.domain.Relationship;
 import com.leevilehtonen.cookagram.domain.Role;
 import com.leevilehtonen.cookagram.repository.AccountRepository;
 import com.leevilehtonen.cookagram.repository.PostRepository;
+import com.leevilehtonen.cookagram.repository.RelationshipRepository;
 import com.leevilehtonen.cookagram.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +29,9 @@ public class AccountService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private RelationshipRepository relationshipRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,5 +57,25 @@ public class AccountService {
         } else {
             return "img/profile.jpg";
         }
+    }
+
+    public Set<Account> getFollowers(Account account) {
+        Set<Account> accounts = new HashSet<>();
+        Set<Relationship> relationships = relationshipRepository.findByFollowed(account);
+        if (relationships == null) {
+            return accounts;
+        }
+        relationships.forEach(relationship -> accounts.add(relationship.getFollower()));
+        return accounts;
+    }
+
+    public Set<Account> getFollowings(Account account) {
+        Set<Account> accounts = new HashSet<>();
+        Set<Relationship> relationships = relationshipRepository.findByFollower(account);
+        if (relationships == null) {
+            return accounts;
+        }
+        relationships.forEach(relationship -> accounts.add(relationship.getFollower()));
+        return accounts;
     }
 }

@@ -1,23 +1,14 @@
 jQuery(document).ready(function ($) {
 
-    $("#follow-form").on("submit", function (event) {
+    $(".like-form").on("submit", function (event) {
         event.preventDefault();
-
-
-        if (!$("#follow-btn").hasClass("disabled")) {
-            $("#follow-btn").toggleClass("active");
-            if ($("#follow-btn").hasClass("active")) {
-                $("#follow-btn").text("Following");
-            } else {
-                $("#follow-btn").text("Follow");
-            }
-            followAjax();
-            $("#follow-btn").addClass("disabled");
-        }
+        var target = $(this).find("input[name=target]").val();
+        var data = $(this).serialize();
+        likePost(target, data);
     });
 });
 
-function likePost(target) {
+function likePost(target, data) {
 
     var like_btn = $("#like_btn_" + target);
     var like_count = $("#like_count_" + target);
@@ -32,25 +23,16 @@ function likePost(target) {
             like_count.text(count);
         }
         like_btn.toggleClass("active-btn");
-        sendData(target);
         like_btn.addClass("disabled");
+        sendLike(target, data);
     }
 }
 
-function sendData(target) {
-
-    var data = {};
-    data["target"] = target;
-
-    var headers = {};
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    headers[header] = token;
+function sendLike(target, data) {
     $.ajax({
         type: "POST",
         url: "/like",
         data: data,
-        headers: headers,
         success: function (e) {
             $("#like_btn_" + target).removeClass("disabled");
         },
