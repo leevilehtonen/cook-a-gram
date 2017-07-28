@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<div th:fragment="languagemenu">
+    <button id="language-btn" style="position: fixed; left: 10px; top: 10px;" type="button"
+            class="btn btn-primary btn-sm" data-toggle="modal" data-target="#language-modal">Language
+    </button>
+
+    <div class="modal fade" id="language-modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Language</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" style="padding: 0;">
+                    <a role="button" th:href="@{/(lang=fi)}" class="btn btn-info btn-lg btn-block">Suomeksi</a>
+                    <a role="button" th:href="@{/(lang=en)}" class="btn btn-info btn-lg btn-block">English</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

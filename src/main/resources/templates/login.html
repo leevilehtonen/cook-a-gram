@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
-        lang="en"
         xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -10,7 +9,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href=""/>
 
-    <title>cook-a-gram</title>
+    <title th:text="#{page.login.title}">cook-a-gram</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
 
@@ -26,12 +25,12 @@
 
     <div th:if="${param.error}" class="alert-dialog alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p class="alert-dialog-text">Invalid username or password</p>
+        <p class="alert-dialog-text" th:text="#{page.login.error}">Invalid username or password</p>
     </div>
 
     <div th:if="${message}" class="alert-dialog alert alert-dismissible alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p th:text="${message}" class="alert-dialog-text"></p>
+        <p th:text="#{page.login.message}" class="alert-dialog-text"></p>
     </div>
 
     <div sec:authorize="isAuthenticated()">
@@ -41,19 +40,24 @@
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
 
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
+
 
     <form class="form-login" method="POST" th:action="@{/authenticate}">
-        <h1 class="display-4 form-login-heading">Log in</h1>
+        <h1 class="display-4 form-login-heading" th:text="#{page.login.header}">Log in</h1>
 
-        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username"
+        <input type="text" name="username" id="inputUsername" class="form-control"
+               th:placeholder="#{page.login.username}"
                required="required" autofocus="autofocus"/>
 
 
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
+        <input type="password" name="password" id="inputPassword" class="form-control"
+               th:placeholder="#{page.login.password}"
                required="required"/>
 
-        <p class="form-text text-muted">Don't have an account? <a th:href="@{/signup}">Sign up</a></p>
-        <button class="btn btn-primary btn-block" type="submit">Log in</button>
+        <p style="display: inline-block" class="form-text text-muted" th:text="#{page.login.noaccount}">Don't have an
+            account?</p> <a th:href="@{/signup}" th:text="#{page.login.noaccountlink}">Sign up</a>
+        <button class="btn btn-primary btn-block" type="submit" th:text="#{page.login.loginbtn}">Log in</button>
     </form>
 
 </div>

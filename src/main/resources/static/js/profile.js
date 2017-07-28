@@ -32,13 +32,15 @@ function followUser(data) {
         if (followBtn.hasClass("active")) {
             followBtn.text("Following");
             var count = parseInt(followerCount.text().split(' ')[0]);
+            var text = followerCount.text().split(' ')[1];
             count++;
-            followerCount.text(count + ' followers');
+            followerCount.text(count + ' ' + text);
         } else {
             followBtn.text("Follow");
             var count = parseInt(followerCount.text().split(' ')[0]);
+            var text = followerCount.text().split(' ')[1];
             count--;
-            followerCount.text(count + ' followers');
+            followerCount.text(count + ' ' + text);
         }
         followBtn.addClass("disabled");
         sendData(data);

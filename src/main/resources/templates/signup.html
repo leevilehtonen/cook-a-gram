@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
-        lang="en"
         xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -10,7 +9,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href=""/>
 
-    <title>cook-a-gram</title>
+    <title th:text="#{page.signup.title}">cook-a-gram</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
     <link href="../../css/signup.css" rel="stylesheet" th:href="@{/css/signup.css}" type="text/css"/>
@@ -29,39 +28,46 @@
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
 
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
+
     <form class="form-signup" method="POST" th:action="@{/accounts}" th:object="${account}">
         <h1 class="display-4 form-signup-heading">Sign up</h1>
 
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required"
+        <input type="email" name="email" id="inputEmail" class="form-control" th:placeholder="#{page.signup.email}"
+               required="required"
                autofocus="autofocus"/>
 
         <label class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</label>
 
 
-        <input type="text" name="firstname" id="inputFirstname" class="form-control" placeholder="First Name"
+        <input type="text" name="firstname" id="inputFirstname" class="form-control"
+               th:placeholder="#{page.signup.firstname}"
                required="required"/>
 
         <label class="error" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname Error</label>
 
 
-        <input type="text" name="lastname" id="inputLastname" class="form-control" placeholder="Last Name"
+        <input type="text" name="lastname" id="inputLastname" class="form-control"
+               th:placeholder="#{page.signup.lastname}"
                required="required"/>
 
         <label class="error" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname Error</label>
 
 
-        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username"
+        <input type="text" name="username" id="inputUsername" class="form-control"
+               th:placeholder="#{page.signup.username}"
                required="required"/>
 
         <label class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</label>
 
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
+        <input type="password" name="password" id="inputPassword" class="form-control"
+               th:placeholder="#{page.signup.password}"
                required="required"/>
 
         <label class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</label>
 
-
-        <p class="form-text text-muted">Have an account? <a th:href="@{/login}">Login</a></p>
+        <p style="display: inline-block" class="form-text text-muted" th:text="#{page.signup.haveaccount}">Have an
+            account?</p> <a th:href="@{/login}" th:text="#{page.signup.haveaccountlink}">Log in</a>
         <button class="btn btn-primary btn-block" type="submit">Sign up</button>
     </form>
 

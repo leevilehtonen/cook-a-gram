@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
-        lang="en"
         xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -11,7 +10,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href=""/>
 
-    <title>cook-a-gram</title>
+    <title th:text="#{page.explore.title}">cook-a-gram</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
 
@@ -29,11 +28,14 @@
     <div sec:authorize="isAnonymous()">
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
+
 
     <div th:each="post : ${posts}">
         <div th:replace="fragments/post :: post(post=${post})"></div>
     </div>
 
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
 
 </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
@@ -19,8 +19,8 @@
 
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-3" th:text="${header}">Error 404</h1>
-        <p class="lead" th:text="${content}">Bad request</p>
+        <h1 class="display-3" th:text="${header != null} ? ${header} : 'Error'">Error 404</h1>
+        <p class="lead" th:text="${content != null } ? ${content} : 'Something went wrong'">Bad request</p>
         <hr class="my-4"/>
         <p class="lead">
             <a class="btn btn-primary btn-lg" href="/explore" role="button">Explore</a>

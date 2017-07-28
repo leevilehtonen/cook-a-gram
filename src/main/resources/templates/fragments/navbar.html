@@ -7,36 +7,37 @@
 <body>
 
 <div th:fragment="navbar-auth" class="fixed-bottom row justify-content-center bg-primary">
-    <ul class="nav nav-pills nav-justified col-6">
+    <ul class="nav nav-pills nav-justified col-xs-12 col-md-6">
         <li class="nav-item">
-            <a class="nav-link" href="/feed">Feed</a>
+            <a class="nav-link" href="/feed" th:text="#{page.feed.title}">Feed</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/explore">Explore</a>
+            <a class="nav-link" href="/explore" th:text="#{page.explore.title}">Explore</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/post">Post</a>
+            <a class="nav-link" href="/post" th:text="#{page.post.title}">Post</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
+            <a class="nav-link" href="/profile" th:text="#{page.profile.title}">Profile</a>
         </li>
         <li class="nav-item">
             <form id="logout-form" method="POST" th:action="@{/logout}"></form>
-            <a class="nav-link text-danger" href="#" onclick="$('#logout-form').submit(); return false;">Logout</a>
+            <a class="nav-link text-danger" href="#" onclick="$('#logout-form').submit(); return false;"
+               th:text="#{page.logout.title}">Logout</a>
         </li>
     </ul>
 </div>
 
 <div th:fragment="navbar" class="fixed-bottom row justify-content-center bg-primary">
-    <ul class="nav nav-pills nav-justified col-6">
+    <ul class="nav nav-pills nav-justified col-xs-12 col-md-6">
         <li class="nav-item">
-            <a class="nav-link" href="/explore">Explore</a>
+            <a class="nav-link" href="/explore" th:text="#{page.explore.title}">Explore</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-success" href="/login">Log in</a>
+            <a class="nav-link text-success" href="/login" th:text="#{page.login.title}">Log in</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-info" href="/signup">Sign up</a>
+            <a class="nav-link text-info" href="/signup" th:text="#{page.signup.title}">Sign up</a>
         </li>
     </ul>
 </div>

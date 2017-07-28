@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
-        lang="en"
         xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -10,7 +9,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href=""/>
 
-    <title>cook-a-gram</title>
+    <title th:utext="#{page.feed.title}">cook-a-gram</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
 
@@ -28,15 +27,20 @@
     <div sec:authorize="isAnonymous()">
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
+
 
     <div th:if="${#lists.size(posts) == 0}" class="info-dialog alert-dialog alert alert-dismissible alert-info">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p class="alert-dialog-text">Add some friends to see their posts in your feed</p>
+        <p class="alert-dialog-text" th:text="#{page.feed.nofriendsmsg}">Add some friends to see their posts in your
+            feed</p>
     </div>
 
     <div th:each="post : ${posts}">
         <div th:replace="fragments/post :: post(post=${post})"></div>
     </div>
+
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
 
 
 </div>

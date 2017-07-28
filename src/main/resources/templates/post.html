@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags"
-        lang="en"
         xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -10,7 +9,7 @@
     <meta name="author" content=""/>
     <link rel="icon" href=""/>
 
-    <title>cook-a-gram</title>
+    <title th:text="#{page.post.title}">cook-a-gram</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/4-alpha/lux/bootstrap.min.css"/>
     <link href="../../css/bootstrap-tagsinput.css" rel="stylesheet" th:href="@{/css/bootstrap-tagsinput.css}"
@@ -30,22 +29,25 @@
         <div th:replace="fragments/navbar :: navbar"></div>
     </div>
 
+    <div th:replace="fragments/languagemenu :: languagemenu"></div>
+
+
     <div th:if="${message}" class="alert-dialog alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <p th:text="${message}" class="alert-dialog-text"></p>
+        <p th:text="#{page.post.message}" class="alert-dialog-text"></p>
     </div>
 
 
     <form class="form-post" method="POST" th:action="@{/posts}" enctype="multipart/form-data">
 
-        <h1 class="display-4 form-post-heading">Post an image</h1>
+        <h1 class="display-4 form-post-heading" th:text="#{page.post.header}">Post an image</h1>
         <img class="preview-image" id="preview"/>
         <input type="file" name="file" id="inputFile" class="form-control" accept="image/*" required="required"/>
         <input type="text" data-role="tagsinput" name="tags" id="inputTags" class="form-control"
-               placeholder="Enter a tag"/>
+               th:placeholder="#{page.post.tag}"/>
 
 
-        <button class="btn btn-primary btn-block" type="submit">Post</button>
+        <button class="btn btn-primary btn-block" type="submit" th:text="#{page.post.postbtn}">Post</button>
     </form>
 
 
