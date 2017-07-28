@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +43,7 @@ public class AccountService {
         return accountRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
+    @Transactional
     public String getProfilePictureUrl(Account account) {
         if (account.getPosts().size() > 0) {
             Post p = postRepository.findTopByPosterOrderByDateDesc(account);

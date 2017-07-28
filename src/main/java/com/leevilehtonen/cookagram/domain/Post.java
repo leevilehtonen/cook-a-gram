@@ -24,7 +24,7 @@ public class Post extends AbstractPersistable<Long> {
                     name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private ImageEntity image;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
