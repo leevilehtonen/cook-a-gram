@@ -1,9 +1,9 @@
 package com.leevilehtonen.cookagram.domain;
 
-import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 @Entity
 public class ImageEntity extends AbstractPersistable<Long> {
@@ -12,7 +12,7 @@ public class ImageEntity extends AbstractPersistable<Long> {
     private String mediaType;
     private Long size;
 
-    @Type(type = "org.hibernate.type.BinaryType")
+    @Lob
     private byte[] content;
 
     public byte[] getContent() {
