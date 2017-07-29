@@ -10,11 +10,11 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles({"development"})
+@ActiveProfiles({"production"})
 public class CookAGramApplicationTest {
 
     @Test
     public void testProduction() {
-        assertEquals("f", "f");
+        assertEquals("running", "running");
     }
 }
