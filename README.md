@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Built with
 
-What technology have been used in this project serverside
+What tech have been used in this project serverside
 
 - [Java JDK](http://www.oracle.com/technetwork/java/javase/overview/index.html) - Java Platform lets you develop and deploy Java applications on desktops and servers.
 - [Spring Boot](http://projects.spring.io/spring-boot/) - Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications.
