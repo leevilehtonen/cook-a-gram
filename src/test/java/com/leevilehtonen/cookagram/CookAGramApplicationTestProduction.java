@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles({"production"})
@@ -13,6 +15,6 @@ public class CookAGramApplicationTestProduction {
 
     @Test
     public void testProduction() {
-        System.out.println("Hello World!");
+        assertEquals("f", "f");
     }
 }
