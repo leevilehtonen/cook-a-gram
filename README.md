@@ -7,7 +7,7 @@
 Social picture sharing app
 
 - [Live demo](https://cook-a-gram.herokuapp.com/) - Live demo username: `tester`, password: `123456`
-- [Documentation](documentation/) - Documentation index
+- [Documentation](documentation/index.md) - Documentation index
 
 ## Getting Started
 

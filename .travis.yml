@@ -10,4 +10,4 @@ cache:
 notifications:
   email: false
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t https://github.com/leevilehtonen/cook-a-gram
+  - bash <(curl -s https://codecov.io/bash)

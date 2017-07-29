@@ -13,6 +13,6 @@ public class CookAGramApplicationTestProduction {
 
     @Test
     public void testProduction() {
-
+        System.out.println("Hello World!");
     }
 }
