@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller listening requests to all main navigation endpoints
+ *
+ * @author lleevi
+ */
 @Controller
 public class DefaultController {
 
@@ -39,16 +44,28 @@ public class DefaultController {
     @Autowired
     private LikeService likeService;
 
+    /**
+     * Get login page
+     * @return login
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getLogin() {
         return "login";
     }
 
+    /**
+     * Get sigunp page
+     * @return signup
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String getSignup(Account account) {
         return "signup";
     }
 
+    /**
+     * Get feed page. Attaches posts and likes to model
+     * @return feed
+     */
     @RequestMapping(value = "/feed", method = RequestMethod.GET)
     public String getFeed(Model model) {
         model.addAttribute("posts", postService.getPostsFromFollowedAccounts());
@@ -56,6 +73,12 @@ public class DefaultController {
         return "feed";
     }
 
+    /**
+     * Get explore page. If has param tag then attaches posts with given tag. If has param post attaches one post with given id. Otherwise attaches all posts in most liked order. In any case attaches users likes.
+     * @param postId id of the post to look for
+     * @param tagName name of the target tag
+     * @return explore page
+     */
     @RequestMapping(value = "/explore", method = RequestMethod.GET)
     public String getExplore(
             @RequestParam(value = "post", required = false) Long postId,
@@ -72,11 +95,20 @@ public class DefaultController {
         return "explore";
     }
 
+    /**
+     * Get post page
+     * @return post
+     */
     @RequestMapping(value = "/post", method = RequestMethod.GET)
     public String getPost() {
         return "post";
     }
 
+    /**
+     * Get profile page. If has a param id the attaches the profile of the account with that id. Also attaches if the loggedin user is following that account, follower count, following count, profile image url and posts of the account.
+     * @param id target id of the account
+     * @return profile page
+     */
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String getProfile(@RequestParam(value = "id", required = false) Long id, Model model) {
         if (id == accountService.getAuthenticatedAccount().getId()) {
@@ -106,6 +138,10 @@ public class DefaultController {
         return "profile";
     }
 
+    /**
+     * Return feed if loggedin otherwise explore
+     * @return default page
+     */
     @RequestMapping(value = "*", method = RequestMethod.GET)
     public String getDefault() {
         if (accountService.getAuthenticatedAccount() == null) {

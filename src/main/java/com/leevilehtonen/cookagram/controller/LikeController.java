@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Controller listening requests to likes endpoint
+ *
+ * @author lleevi
+ */
 @Controller
 @RequestMapping("/like")
 public class LikeController {
@@ -15,6 +20,11 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
+    /**
+     * Toggles the like of the post
+     * @param target post id
+     * @return like body
+     */
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public String toggleLike(@RequestParam(name = "target") Long target) {

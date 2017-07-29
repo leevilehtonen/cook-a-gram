@@ -9,11 +9,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("development")
-public class CookAGramApplicationTest {
+@ActiveProfiles({"development", "default"})
+public class CookAGramApplicationTestDevelopment {
 
     @Test
-    public void testDefault() {
+    public void testDevelopment() {
 
     }
 }

@@ -9,3 +9,5 @@ cache:
     - $HOME/.m2
 notifications:
   email: false
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t https://github.com/leevilehtonen/cook-a-gram

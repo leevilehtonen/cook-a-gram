@@ -14,6 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+/**
+ * Controller listening requests to accounts endpoint
+ *
+ * @author lleevi
+ */
 @Controller
 @RequestMapping("/accounts")
 public class AccountController {
@@ -24,6 +29,13 @@ public class AccountController {
     @Autowired
     private AccountUniqueValidator accountUniqueValidator;
 
+    /**
+     * Post request to accounts is used for creating new accounts
+     * @param account to create
+     * @param bindingResult for error checking
+     * @param redirectAttributes for redirecting with a message
+     * @return redirect or stay in page
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String postAccounts(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         accountUniqueValidator.validate(account, bindingResult);

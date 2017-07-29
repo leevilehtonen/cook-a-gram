@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+/**
+ * Relationship service for relationship related functionality
+ *
+ * @author lleevi
+ */
 @Service
 public class RelationshipService {
 
@@ -21,6 +26,11 @@ public class RelationshipService {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * Toggles relationship (if user is following the target, then unfollows or opposite)
+     *
+     * @param target id of the target account
+     */
     @Transactional
     public void toggleRelationship(Long target) {
         Account followed = accountRepository.findOne(target);

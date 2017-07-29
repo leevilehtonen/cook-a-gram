@@ -7,9 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Controller listening requests to error endpoint
+ *
+ * @author lleevi
+ */
 @Controller
 public class ErrorController {
-
+    /**
+     * Checks error code, and return error page with message
+     * @param model
+     * @param request
+     * @return error page
+     */
     @RequestMapping(value = "error", method = RequestMethod.GET)
     public String getError(Model model, HttpServletRequest request) {
 
@@ -38,6 +48,11 @@ public class ErrorController {
         return "error";
     }
 
+    /**
+     * Gets the error code
+     * @param httpRequest
+     * @return
+     */
     private int getErrorCode(HttpServletRequest httpRequest) {
         return (Integer) httpRequest
                 .getAttribute("javax.servlet.error.status_code");

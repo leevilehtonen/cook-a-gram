@@ -13,6 +13,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Development security config allowing access to h2-console
+ *
+ * @author lleevi
+ */
 @Profile({"default", "development"})
 @Configuration
 @EnableWebSecurity

@@ -10,6 +10,13 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
+/**
+ * Web mvc config to allow different languages
+ *
+ * @author lleevi
+ * @see LocaleChangeInterceptor
+ * @see CookieLocaleResolver
+ */
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 

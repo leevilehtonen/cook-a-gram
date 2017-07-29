@@ -13,6 +13,11 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Like service for liking related functionality
+ *
+ * @author lleevi
+ */
 @Service
 public class LikeService {
 
@@ -25,6 +30,11 @@ public class LikeService {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * Toggles a like in a post (if account has liked it, it will be unliked or opposite)
+     *
+     * @param target target post
+     */
     @Transactional
     public void toggleLike(Long target) {
         Account account = accountService.getAuthenticatedAccount();
@@ -43,6 +53,11 @@ public class LikeService {
 
     }
 
+    /**
+     * Get the ids of posts that the account has liked
+     * @param account target account
+     * @return set of ids
+     */
     public Set<Long> getAccountLikedPostIds(Account account) {
         Set<Long> likeIds = new HashSet<>();
         Set<ResourceLike> likes = likeRepository.findByLiker(account);

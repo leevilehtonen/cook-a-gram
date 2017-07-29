@@ -10,6 +10,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
+/**
+ * Controller listening requests to post endpoint
+ *
+ * @author lleevi
+ */
 @Controller
 @RequestMapping("/posts")
 public class PostController {
@@ -17,6 +22,15 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    /**
+     * Creates new post
+     * @see PostService
+     * @param file BASE64 fileurl
+     * @param tags comma-separated string of tags
+     * @param redirectAttributes
+     * @return redirect to explore
+     * @throws IOException
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String postPost(@RequestParam("file") String file, @RequestParam String tags, RedirectAttributes redirectAttributes) throws IOException {
         postService.createPost(file, tags);

@@ -7,6 +7,11 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Exception handling for file submissions
+ *
+ * @author lleevi
+ */
 @ControllerAdvice
 public class MultipartExceptionHandler {
 

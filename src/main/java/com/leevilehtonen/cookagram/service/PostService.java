@@ -16,6 +16,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Post service for posts related functionality
+ *
+ * @author lleevi
+ */
 @Service
 public class PostService {
 
@@ -34,6 +39,13 @@ public class PostService {
     @Autowired
     private RelationshipRepository relationshipRepository;
 
+    /**
+     * Creates new post. Starts by parsing the image fileurl to byte array. Then sets name, mediatype, size and content. Crates a set of tags from string and saves them to database if tehy doesn't exists. Combines tags and image to a post and saves it to database
+     *
+     * @param file Base64 image fileurl object
+     * @param tags List of comma-separated tag strings
+     * @throws IOException
+     */
     @Transactional
     public void createPost(String file, String tags) throws IOException {
 
@@ -56,6 +68,12 @@ public class PostService {
 
     }
 
+    /**
+     * Splits the tags using commas, saves them to database if they don't exists
+     *
+     * @param tags comma-separated string of tags
+     * @return set of tags which are persisted in database
+     */
     @Transactional
     public Set<Tag> saveAndLoadTags(String tags) {
         String[] tagStrings = tags.split(",");
@@ -72,6 +90,11 @@ public class PostService {
         return tagSet;
     }
 
+    /**
+     * Gets the posts from server and transforms them to 3 by X grid (WxH) (to easilly add them as a grid to profile page)
+     * @param account target account
+     * @return List<Post[]> object of posts
+     */
     @Transactional
     public List<Post[]> getPostsByAccount(Account account) {
         List<Post> posts = postRepository.findByPosterOrderByDateDesc(account);
@@ -91,6 +114,10 @@ public class PostService {
 
     }
 
+    /**
+     * Gets the posts from accounts that the account who is logged in is following
+     * @return list of posts from followed accounts
+     */
     @Transactional
     public List<Post> getPostsFromFollowedAccounts() {
         List<Account> followedAccounts = new ArrayList<>();
@@ -102,11 +129,20 @@ public class PostService {
         return postRepository.findByPosterInOrderByDateDesc(followedAccounts);
     }
 
+    /**
+     * Gets the posts in order of most likes
+     * @return list of post
+     */
     @Transactional
     public List<Post> getMostLikedPost() {
         return postRepository.findMostLiked();
     }
 
+    /**
+     * Finds posts by a tag
+     * @param tagName target tag
+     * @return list of post which has a target tag
+     */
     @Transactional
     public Set<Post> getPostsByTag(String tagName) {
         Tag tag = tagRepository.findByName(tagName);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ResourceBundleManager">
-    <file url="file://$PROJECT_DIR$/src/main/resources/texts.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/texts_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/texts_fi.properties" />
+    <file url="file://$PROJECT_DIR$/main/resources/texts.properties" />
+    <file url="file://$PROJECT_DIR$/main/resources/texts_en.properties" />
+    <file url="file://$PROJECT_DIR$/main/resources/texts_fi.properties" />
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/texts.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/texts_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/texts_fi.properties" />
+      <file value="file://$PROJECT_DIR$/main/resources/texts.properties" />
+      <file value="file://$PROJECT_DIR$/main/resources/texts_en.properties" />
+      <file value="file://$PROJECT_DIR$/main/resources/texts_fi.properties" />
       <base-name>texts</base-name>
     </custom-resource-bundle>
   </component>

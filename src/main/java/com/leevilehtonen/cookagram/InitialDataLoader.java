@@ -14,6 +14,11 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Initial data loader creates one root user for application and one test user
+ *
+ * @author lleevi
+ */
 @Component
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -28,6 +33,11 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * When application event occurs, check whether initial data is loaded and if not creates some initial data
+     *
+     * @param contextRefreshedEvent
+     */
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -58,25 +68,26 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         admin.setRoles(rolesAdmin);
         accountRepository.save(admin);
 
-
         Account user = new Account();
         user.setUsername("tester");
         user.setEmail("test@test.com");
         user.setFirstname("Test");
         user.setLastname("Test");
 
-        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setPassword(bCryptPasswordEncoder.encode("123456"));
         Set<Role> rolesUser = new HashSet<>();
         rolesUser.add(roleRepository.findByName("USER"));
         user.setRoles(rolesUser);
         accountRepository.save(user);
-
-
-
-
         setup = true;
     }
 
+    /**
+     * Create if does not exists a new role to database
+     *
+     * @param name name of the role
+     * @return created or found role object
+     */
     @Transactional
     public Role createRole(String name) {
 
