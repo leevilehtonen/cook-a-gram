@@ -69,7 +69,7 @@ public class AccountService {
      */
     @Transactional
     public String getProfilePictureUrl(Account account) {
-        if (account.getPosts().size() > 0) {
+        if (account.getPosts() != null && account.getPosts().size() > 0) {
             Post p = postRepository.findTopByPosterOrderByDateDesc(account);
 
             return "/images/" + p.getImage().getId();
