@@ -9,9 +9,9 @@ cache:
     - $HOME/.m2
 notifications:
   email: false
-env: "JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/travis_ci_test JDBC_DATABASE_USERNAME=postgres",
-  before_script: [
-    "psql -c 'create database travis_ci_test;' -U postgres"
-  ],
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+env: "JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/travis_ci_test JDBC_DATABASE_USERNAME=postgres"
+before_script: [
+  "psql -c 'create database travis_ci_test;' -U postgres"
+]
