@@ -1,5 +1,6 @@
 package com.leevilehtonen.cookagram.controller;
 
+import com.leevilehtonen.cookagram.service.AccountService;
 import com.leevilehtonen.cookagram.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private AccountService accountService;
+
     /**
      * Toggles the like of the post
      * @param target post id
@@ -28,7 +32,7 @@ public class LikeController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public String toggleLike(@RequestParam(name = "target") Long target) {
-        likeService.toggleLike(target);
+        likeService.toggleLike(accountService.getAuthenticatedAccount(), target);
         return "like";
     }
 
