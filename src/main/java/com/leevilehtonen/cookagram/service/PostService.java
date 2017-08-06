@@ -47,7 +47,7 @@ public class PostService {
      * @throws IOException
      */
     @Transactional
-    public void createPost(String file, String tags) throws IOException {
+    public void createPost(String file, String tags, Account a) throws IOException {
 
         ImageEntity imageEntity = new ImageEntity();
         byte[] imagedata = DatatypeConverter.parseBase64Binary(file.substring(file.indexOf(",") + 1));
@@ -62,10 +62,15 @@ public class PostService {
 
         Post post = new Post();
         post.setImage(imageEntity);
-        post.setPoster(accountService.getAuthenticatedAccount());
+        post.setPoster(a);
         post.setTags(tagsSet);
         postRepository.save(post);
 
+    }
+
+    @Transactional
+    public void createPost(String file, String tags) throws IOException {
+        createPost(file, tags, accountService.getAuthenticatedAccount());
     }
 
     /**
