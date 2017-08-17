@@ -10,6 +10,7 @@
   * By tag
   * By user
 * Register
+* Change language
 
 **Registered user actions:**
 * Explore pictures
@@ -21,3 +22,4 @@
 * Follow friends
 * Like pictures
 * Post picture
+* Change language
