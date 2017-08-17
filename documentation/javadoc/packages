@@ -1,0 +1,8 @@
+com.leevilehtonen.cookagram.config
+com.leevilehtonen.cookagram.controller
+com.leevilehtonen.cookagram
+com.leevilehtonen.cookagram.domain
+com.leevilehtonen.cookagram.exception
+com.leevilehtonen.cookagram.repository
+com.leevilehtonen.cookagram.service
+com.leevilehtonen.cookagram.validator

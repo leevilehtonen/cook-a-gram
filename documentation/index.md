@@ -1,8 +1,6 @@
 ### Documentation
-* [Topic and structure](/docs/topicAndStructure.md)
-* [User guide](/docs/userGuide.md)
-* [Test documentation](/docs/testDocs.md)
-* [Javadoc](https://htmlpreview.github.io/?https://github.com/leevilehtonen/UrbanMinigolf/blob/master/javadoc/index.html)
-* [Pit-report](https://htmlpreview.github.io/?https://github.com/leevilehtonen/UrbanMinigolf/blob/master/docs/pit-report/201703031750/index.html)
-* [Checkstyle-report](https://htmlpreview.github.io/?https://github.com/leevilehtonen/UrbanMinigolf/blob/master/docs/checkstyle-report/checkstyle.html)
-* [Working hours](/docs/workingHours.md)
+* [Topic](/documentation/topic.md)
+* [Use cases](/documentation/usecases.md)
+* [Todos](/documentation/todos.md)
+* [Tests](/docs/test.md)
+* [Javadoc](https://htmlpreview.github.io/?https://github.com/leevilehtonen/cook-a-gram/blob/master/javadoc/index.html)
